@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Stream;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -33,7 +35,7 @@ public class HashNB {
     protected Stream<String> linesStream;
     protected Stream<String[]> linesOfArray;
     
-    private class HashVal {
+    public class HashVal {
         String name;
         String login;
         String password;
@@ -69,6 +71,18 @@ public class HashNB {
         System.out.println("Hash Size:" + hash.size());        
     }
     
+    public void SetKeyList(ObservableList<String> nbNames) {
+      Set<Map.Entry<String,HashVal>> set = hash.entrySet();
+      
+      for (Map.Entry<String,HashVal> me : set) {
+        nbNames.add(me.getKey());
+      }
+        
+    }
+    
+    public HashVal getHashVal(String key) {
+        return hash.get(key);
+    }
     
     protected void readInput() throws IOException {
  //       List<List<String>> records = new ArrayList<List<String>>();

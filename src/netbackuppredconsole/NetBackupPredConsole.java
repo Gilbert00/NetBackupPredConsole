@@ -58,7 +58,7 @@ public class NetBackupPredConsole extends Application {
     protected Stream<String> linesStream;
     protected Stream<String[]> linesOfArray;
     
-    
+    protected HashNB hashNB;
     
 //    Map<String,HashVal> hash;
 //    List<Map.Entry<String,HashVal>> list;
@@ -74,8 +74,14 @@ public class NetBackupPredConsole extends Application {
         Label lbLogin = new Label();
         Label lbPswd = new Label();
         
-        ObservableList<String> nbNames = 
-                FXCollections.observableArrayList("Old ChO", "New Cho", "Ndj", "Rzn");
+        hashNB = new HashNB();
+        hashNB.SetHash();
+                
+        ObservableList<String> nbNames = FXCollections.observableArrayList();
+        hashNB.SetKeyList(nbNames);
+        
+//       ObservableList<String> nbNames = 
+//                FXCollections.observableArrayList("Old ChO", "New Cho", "Ndj", "Rzn");
         ListView<String> lvNames = new ListView<String>(nbNames);
         double lvW = 100;
         double lvH = 70;
@@ -86,8 +92,11 @@ public class NetBackupPredConsole extends Application {
                 public void changed(ObservableValue<? extends String> changed, 
                         String oldVal, String newVal) {
                     //TO-DO !!!
-                    lbName.setText(newVal);
-//                   System.out.println(newVal);
+                    HashNB.HashVal val = hashNB.getHashVal(newVal);
+                    lbName.setText(val.name);
+                    lbLogin.setText(val.login);
+                    lbPswd.setText(val.password);
+                  System.out.println(newVal);
                 }
                 });
         
@@ -155,9 +164,6 @@ public class NetBackupPredConsole extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        
-        HashNB hashNB = new HashNB();
-        hashNB.SetHash();
         
         launch(args);
     }
