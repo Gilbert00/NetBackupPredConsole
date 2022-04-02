@@ -66,6 +66,8 @@ public class NetBackupPredConsole extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
+        
+        String bold = "-fx-font-weight: bold";
 
         Label lbNameHead = new Label("Name:");
         Label lbLoginHead = new Label("Login:");
@@ -73,6 +75,9 @@ public class NetBackupPredConsole extends Application {
         Label lbName = new Label();
         Label lbLogin = new Label();
         Label lbPswd = new Label();
+        lbName.setStyle(bold);
+        lbLogin.setStyle(bold);
+        lbPswd.setStyle(bold);
         
         hashNB = new HashNB();
         hashNB.SetHash();
