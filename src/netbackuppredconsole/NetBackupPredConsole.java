@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 
 /**
  *
@@ -59,10 +61,13 @@ public class NetBackupPredConsole extends Application {
     protected Stream<String[]> linesOfArray;
     
     protected HashNB hashNB;
+    protected static String aliasSelected = "";
     
 //    Map<String,HashVal> hash;
 //    List<Map.Entry<String,HashVal>> list;
 
+    final Clipboard clipboard = Clipboard.getSystemClipboard();
+    final ClipboardContent content = new ClipboardContent();
     
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -97,10 +102,11 @@ public class NetBackupPredConsole extends Application {
                 public void changed(ObservableValue<? extends String> changed, 
                         String oldVal, String newVal) {
                     //TO-DO !!!
-                    HashNB.HashVal val = hashNB.getHashVal(newVal);
-                    lbName.setText(val.name);
-                    lbLogin.setText(val.login);
-                    lbPswd.setText(val.password);
+                    aliasSelected = newVal;
+                    HashNB.HashVal val = hashNB.getHashVal(aliasSelected);
+                    lbName.setText(val.getName());
+                    lbLogin.setText(val.getLogin());
+                    lbPswd.setText(val.getPswd());
                   System.out.println(newVal);
                 }
                 });
@@ -114,6 +120,10 @@ public class NetBackupPredConsole extends Application {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("OK");
+                HashNB.HashVal val = hashNB.getHashVal(aliasSelected);
+                content.putString(val.getPswd());
+                content.putHtml(val.getPswd());
+                clipboard.setContent(content);
             }
         });
         

@@ -36,10 +36,10 @@ public class HashNB {
     protected Stream<String[]> linesOfArray;
     
     public class HashVal {
-        String name;
-        String login;
-        String password;
-        String path;
+        private String name;
+        private String login;
+        private String password;
+        private String path;
 
         public HashVal(String name, String login, String password, String path) {
             this.name = name;
@@ -47,6 +47,23 @@ public class HashNB {
             this.password = password;
             this.path = path;
         }
+        
+        public String getName() {
+            return name;
+        }
+
+        public String getLogin() {
+            return login;
+        }
+
+        public String getPswd() {
+            return password;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
     }
     Map<String,HashVal> hash;
     List<Map.Entry<String,HashVal>> list;   
@@ -85,10 +102,7 @@ public class HashNB {
     }
     
     protected void readInput() throws IOException {
- //       List<List<String>> records = new ArrayList<List<String>>();
-//        String[] values;
- 
-        
+         
 // BufferedReader reader = Files.newBufferedReader(Paths.get("src/main/resources/input.txt")) 
 // int buffer = 16384 * 16384;   1048576     
 //        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
